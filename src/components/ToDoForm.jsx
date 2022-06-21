@@ -5,7 +5,11 @@ const ToDoForm = ({ todo, handleChange, handleClick }) => {
     <div className="todo-form">
       <p>~ Today I need to ~</p>
       <span>
-        <input value={todo} onChange={(e) => handleChange(e.target.value)} />
+        <input
+          value={todo}
+          onChange={(e) => handleChange(e.key === "Enter", e.target.value)}
+          onKeyPress={(e) => handleChange(e.key === "Enter", e.target.value)}
+        />
         <button onClick={() => handleClick(todo)}>Submit</button>
       </span>
     </div>

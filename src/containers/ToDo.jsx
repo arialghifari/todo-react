@@ -7,8 +7,10 @@ const ToDo = () => {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState(["Nyanyi", "Futsal", "Makan"]);
 
-  const handleChange = (todo) => {
+  const handleChange = (key, todo) => {
     setTodo(todo);
+
+    if (key) handleClick(todo);
   };
 
   const handleClick = (todo) => {
