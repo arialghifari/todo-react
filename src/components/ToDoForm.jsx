@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const ToDoForm = () => {
+const ToDoForm = ({ todo, handleChange, handleClick }) => {
   return (
-    <div className='todo-form'>
+    <div className="todo-form">
       <p>~ Today I need to ~</p>
       <span>
-        <input />
-        <button>Submit</button>
+        <input value={todo} onChange={(e) => handleChange(e.target.value)} />
+        <button onClick={() => handleClick(todo)}>Submit</button>
       </span>
     </div>
   );
