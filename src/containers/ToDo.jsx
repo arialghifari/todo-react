@@ -5,17 +5,31 @@ import ToDoList from "../components/ToDoList";
 
 const ToDo = () => {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState(["Nyanyi", "Futsal", "Makan"]);
+  const [todos, setTodos] = useState([
+    { id: 0, task: "Nyanyi", isCompleted: false },
+    { id: 1, task: "Futsal", isCompleted: true },
+  ]);
 
   const handleChange = (key, todo) => {
     setTodo(todo);
 
-    if (key) handleClick(todo);
+    if (key === "Enter") handleClick(todo);
   };
 
   const handleClick = (todo) => {
-    setTodos([...todos, todo]);
+    const newTodo = { id: todos.length, task: todo, isCompleted: false };
+    setTodos([...todos, newTodo]);
     setTodo("");
+  };
+
+  const handleCheckbox = (id) => {
+    const checkboxChanged = todos.map((item) => {
+      if (item.id === id) item.isCompleted = !item.isCompleted;
+
+      return item;
+    });
+
+    setTodos(checkboxChanged);
   };
 
   return (
@@ -26,7 +40,7 @@ const ToDo = () => {
         handleChange={handleChange}
         handleClick={handleClick}
       />
-      <ToDoList todos={todos} />
+      <ToDoList todos={todos} handleCheckbox={handleCheckbox} />
     </div>
   );
 };
