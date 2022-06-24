@@ -1,3 +1,7 @@
+* {
+  font-family: "Roboto", "Segoe UI", sans-serif;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -24,7 +28,12 @@
 }
 
 .todo-list {
-  width: fit-content;
+  width: 100%;
+}
+
+.todo-form span {
+  display: flex;
+  gap: 16px;
 }
 
 .todo-form p {
@@ -38,4 +47,8 @@
 
 .todo-form input {
   width: 80%;
+}
+
+.done {
+  text-decoration: line-through;
 }
