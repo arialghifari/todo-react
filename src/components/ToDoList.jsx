@@ -12,13 +12,13 @@ const ToDoList = ({ todos, handleCheckbox }) => {
   return (
     <div className="todo-list">
       <List sx={{ marginTop: "1rem" }}>
-        {todos.map((item, id) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton onClick={() => handleCheckbox(id)}>
-              <Checkbox checked={item.isCompleted} />
+        {todos.map((todo) => (
+          <ListItem key={todo.id} disablePadding>
+            <ListItemButton onClick={() => handleCheckbox(todo.id)}>
+              <Checkbox checked={todo.isCompleted} disableRipple />
               <ListItemText
-                primary={item.task}
-                className={item.isCompleted ? "done" : null}
+                primary={todo.task}
+                className={todo.isCompleted ? "done" : null}
               />
             </ListItemButton>
           </ListItem>

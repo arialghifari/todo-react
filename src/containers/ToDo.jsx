@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
+import { Button } from "@mui/material";
+
 import ToDoForm from "../components/ToDoForm";
 import ToDoList from "../components/ToDoList";
 
 const ToDo = () => {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([
-    { id: 0, task: "Nyanyi", isCompleted: false },
+    { id: 0, task: "Gitar", isCompleted: false },
     { id: 1, task: "Futsal", isCompleted: true },
   ]);
 
@@ -17,19 +19,28 @@ const ToDo = () => {
   };
 
   const handleClick = (todo) => {
-    const newTodo = { id: todos.length, task: todo, isCompleted: false };
+    const newTodo = {
+      id: todos.length > 0 ? todos[todos.length - 1].id + 1 : 0,
+      task: todo,
+      isCompleted: false,
+    };
+
     setTodos([...todos, newTodo]);
     setTodo("");
   };
 
   const handleCheckbox = (id) => {
-    const checkboxChanged = todos.map((item) => {
-      if (item.id === id) item.isCompleted = !item.isCompleted;
+    const newTodo = [...todos];
+    const i = todos.findIndex((todo) => todo.id === id);
 
-      return item;
-    });
+    newTodo[i].isCompleted = !newTodo[i].isCompleted;
+    setTodos(newTodo);
+  };
 
-    setTodos(checkboxChanged);
+  const handleRemove = () => {
+    const newTodo = todos.filter((todo) => !todo.isCompleted);
+
+    setTodos(newTodo);
   };
 
   return (
@@ -41,6 +52,16 @@ const ToDo = () => {
         handleClick={handleClick}
       />
       <ToDoList todos={todos} handleCheckbox={handleCheckbox} />
+      {todos.length > 0 && (
+        <Button
+          onClick={handleRemove}
+          variant="outlined"
+          fullWidth
+          color="error"
+        >
+          Remove Completed
+        </Button>
+      )}
     </div>
   );
 };
