@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
 
@@ -7,10 +7,12 @@ import ToDoList from "../components/ToDoList";
 
 const ToDo = () => {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([
-    { id: 0, task: "Gitar", isCompleted: false },
-    { id: 1, task: "Futsal", isCompleted: true },
-  ]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    console.log("RUNNING!");
+    document.title = `${todos.length} todo`;
+  }, [todos.length]);
 
   const handleChange = (key, todo) => {
     setTodo(todo);
